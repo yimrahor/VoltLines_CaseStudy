@@ -9,7 +9,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class ViewController: UIViewController {
+class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
     let locationAlert = UIAlertAction(title: "Open", style: .default) { _ in
@@ -34,6 +34,9 @@ class ViewController: UIViewController {
         
         mapView.delegate = self
         mapView.showsUserLocation = true
+        
+        let allD = AllData()
+        allD.takeStationDatas()
     }
     
     func createCircleArea(location: CLLocationCoordinate2D) {
@@ -45,7 +48,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: MKMapViewDelegate {
+extension MapViewController: MKMapViewDelegate {
     // Call user location changed
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
@@ -72,7 +75,7 @@ extension ViewController: MKMapViewDelegate {
     }
 }
 
-extension ViewController: CLLocationManagerDelegate {
+extension MapViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .denied, .restricted:

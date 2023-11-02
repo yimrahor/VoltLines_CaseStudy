@@ -9,25 +9,36 @@
 /* Begin PBXBuildFile section */
 		A4C6FBD32AF3A92300BC6C3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBD22AF3A92300BC6C3B /* AppDelegate.swift */; };
 		A4C6FBD52AF3A92300BC6C3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBD42AF3A92300BC6C3B /* SceneDelegate.swift */; };
-		A4C6FBD72AF3A92300BC6C3B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBD62AF3A92300BC6C3B /* ViewController.swift */; };
-		A4C6FBDA2AF3A92300BC6C3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4C6FBD82AF3A92300BC6C3B /* Main.storyboard */; };
+		A4C6FBD72AF3A92300BC6C3B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBD62AF3A92300BC6C3B /* MapViewController.swift */; };
+		A4C6FBDA2AF3A92300BC6C3B /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4C6FBD82AF3A92300BC6C3B /* MapView.storyboard */; };
 		A4C6FBDC2AF3A92500BC6C3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4C6FBDB2AF3A92500BC6C3B /* Assets.xcassets */; };
 		A4C6FBDF2AF3A92500BC6C3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4C6FBDD2AF3A92500BC6C3B /* LaunchScreen.storyboard */; };
 		A4C6FBEA2AF3C5A100BC6C3B /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBE92AF3C5A100BC6C3B /* AlertHelper.swift */; };
 		A4C6FBED2AF3D07300BC6C3B /* StationListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBEC2AF3D07300BC6C3B /* StationListResponse.swift */; };
+		A4C6FBEF2AF3D2AB00BC6C3B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBEE2AF3D2AB00BC6C3B /* APIService.swift */; };
+		A4C6FBF22AF3D2CD00BC6C3B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A4C6FBF12AF3D2CD00BC6C3B /* Alamofire */; };
+		A4C6FBF52AF3D4EC00BC6C3B /* AllData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBF42AF3D4EC00BC6C3B /* AllData.swift */; };
+		A4C6FBFA2AF41B4A00BC6C3B /* ListTripsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4C6FBF92AF41B4A00BC6C3B /* ListTripsView.storyboard */; };
+		A4C6FBFC2AF41B7C00BC6C3B /* ListTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBFB2AF41B7C00BC6C3B /* ListTripsViewController.swift */; };
+		A4C6FBFF2AF4219600BC6C3B /* ListTripsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBFE2AF4219600BC6C3B /* ListTripsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A4C6FBCF2AF3A92300BC6C3B /* VoltLines_CaseStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoltLines_CaseStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4C6FBD22AF3A92300BC6C3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4C6FBD42AF3A92300BC6C3B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A4C6FBD62AF3A92300BC6C3B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A4C6FBD92AF3A92300BC6C3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A4C6FBD62AF3A92300BC6C3B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A4C6FBD92AF3A92300BC6C3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MapView.storyboard; sourceTree = "<group>"; };
 		A4C6FBDB2AF3A92500BC6C3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4C6FBDE2AF3A92500BC6C3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A4C6FBE02AF3A92500BC6C3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4C6FBE92AF3C5A100BC6C3B /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		A4C6FBEC2AF3D07300BC6C3B /* StationListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListResponse.swift; sourceTree = "<group>"; };
+		A4C6FBEE2AF3D2AB00BC6C3B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		A4C6FBF42AF3D4EC00BC6C3B /* AllData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllData.swift; sourceTree = "<group>"; };
+		A4C6FBF92AF41B4A00BC6C3B /* ListTripsView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListTripsView.storyboard; sourceTree = "<group>"; };
+		A4C6FBFB2AF41B7C00BC6C3B /* ListTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTripsViewController.swift; sourceTree = "<group>"; };
+		A4C6FBFE2AF4219600BC6C3B /* ListTripsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTripsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4C6FBF22AF3D2CD00BC6C3B /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,14 +72,14 @@
 		A4C6FBD12AF3A92300BC6C3B /* VoltLines_CaseStudy */ = {
 			isa = PBXGroup;
 			children = (
+				A4C6FBF62AF41AEF00BC6C3B /* View */,
+				A4C6FBF32AF3D4C700BC6C3B /* Service */,
 				A4C6FBEB2AF3CFFA00BC6C3B /* ResponseModel */,
 				A4C6FBE82AF3C56A00BC6C3B /* Helper */,
 				A4C6FBE72AF3AA9400BC6C3B /* Model */,
 				A4C6FBE62AF3AA8600BC6C3B /* Presenter */,
 				A4C6FBD22AF3A92300BC6C3B /* AppDelegate.swift */,
 				A4C6FBD42AF3A92300BC6C3B /* SceneDelegate.swift */,
-				A4C6FBD62AF3A92300BC6C3B /* ViewController.swift */,
-				A4C6FBD82AF3A92300BC6C3B /* Main.storyboard */,
 				A4C6FBDB2AF3A92500BC6C3B /* Assets.xcassets */,
 				A4C6FBDD2AF3A92500BC6C3B /* LaunchScreen.storyboard */,
 				A4C6FBE02AF3A92500BC6C3B /* Info.plist */,
@@ -78,6 +90,7 @@
 		A4C6FBE62AF3AA8600BC6C3B /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				A4C6FBF42AF3D4EC00BC6C3B /* AllData.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -105,6 +118,50 @@
 			path = ResponseModel;
 			sourceTree = "<group>";
 		};
+		A4C6FBF32AF3D4C700BC6C3B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				A4C6FBEE2AF3D2AB00BC6C3B /* APIService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		A4C6FBF62AF41AEF00BC6C3B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A4C6FBF82AF41B1900BC6C3B /* ListTripsView */,
+				A4C6FBF72AF41AF700BC6C3B /* MapView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A4C6FBF72AF41AF700BC6C3B /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				A4C6FBD62AF3A92300BC6C3B /* MapViewController.swift */,
+				A4C6FBD82AF3A92300BC6C3B /* MapView.storyboard */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
+		A4C6FBF82AF41B1900BC6C3B /* ListTripsView */ = {
+			isa = PBXGroup;
+			children = (
+				A4C6FBFD2AF4217500BC6C3B /* Cell */,
+				A4C6FBFB2AF41B7C00BC6C3B /* ListTripsViewController.swift */,
+				A4C6FBF92AF41B4A00BC6C3B /* ListTripsView.storyboard */,
+			);
+			path = ListTripsView;
+			sourceTree = "<group>";
+		};
+		A4C6FBFD2AF4217500BC6C3B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A4C6FBFE2AF4219600BC6C3B /* ListTripsTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -121,6 +178,9 @@
 			dependencies = (
 			);
 			name = VoltLines_CaseStudy;
+			packageProductDependencies = (
+				A4C6FBF12AF3D2CD00BC6C3B /* Alamofire */,
+			);
 			productName = VoltLines_CaseStudy;
 			productReference = A4C6FBCF2AF3A92300BC6C3B /* VoltLines_CaseStudy.app */;
 			productType = "com.apple.product-type.application";
@@ -149,6 +209,9 @@
 				Base,
 			);
 			mainGroup = A4C6FBC62AF3A92300BC6C3B;
+			packageReferences = (
+				A4C6FBF02AF3D2CD00BC6C3B /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = A4C6FBD02AF3A92300BC6C3B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -163,9 +226,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4C6FBFA2AF41B4A00BC6C3B /* ListTripsView.storyboard in Resources */,
 				A4C6FBDF2AF3A92500BC6C3B /* LaunchScreen.storyboard in Resources */,
 				A4C6FBDC2AF3A92500BC6C3B /* Assets.xcassets in Resources */,
-				A4C6FBDA2AF3A92300BC6C3B /* Main.storyboard in Resources */,
+				A4C6FBDA2AF3A92300BC6C3B /* MapView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,9 +241,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4C6FBED2AF3D07300BC6C3B /* StationListResponse.swift in Sources */,
+				A4C6FBFF2AF4219600BC6C3B /* ListTripsTableViewCell.swift in Sources */,
 				A4C6FBEA2AF3C5A100BC6C3B /* AlertHelper.swift in Sources */,
-				A4C6FBD72AF3A92300BC6C3B /* ViewController.swift in Sources */,
+				A4C6FBD72AF3A92300BC6C3B /* MapViewController.swift in Sources */,
 				A4C6FBD32AF3A92300BC6C3B /* AppDelegate.swift in Sources */,
+				A4C6FBEF2AF3D2AB00BC6C3B /* APIService.swift in Sources */,
+				A4C6FBFC2AF41B7C00BC6C3B /* ListTripsViewController.swift in Sources */,
+				A4C6FBF52AF3D4EC00BC6C3B /* AllData.swift in Sources */,
 				A4C6FBD52AF3A92300BC6C3B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,12 +255,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A4C6FBD82AF3A92300BC6C3B /* Main.storyboard */ = {
+		A4C6FBD82AF3A92300BC6C3B /* MapView.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A4C6FBD92AF3A92300BC6C3B /* Base */,
 			);
-			name = Main.storyboard;
+			name = MapView.storyboard;
 			sourceTree = "<group>";
 		};
 		A4C6FBDD2AF3A92500BC6C3B /* LaunchScreen.storyboard */ = {
@@ -331,7 +399,7 @@
 				INFOPLIST_FILE = VoltLines_CaseStudy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = ListTripsView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -358,7 +426,7 @@
 				INFOPLIST_FILE = VoltLines_CaseStudy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = ListTripsView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -396,6 +464,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A4C6FBF02AF3D2CD00BC6C3B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A4C6FBF12AF3D2CD00BC6C3B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4C6FBF02AF3D2CD00BC6C3B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A4C6FBC72AF3A92300BC6C3B /* Project object */;
 }
