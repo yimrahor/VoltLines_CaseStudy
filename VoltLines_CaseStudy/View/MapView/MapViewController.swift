@@ -11,17 +11,22 @@ import MapKit
 
 class MapViewController: UIViewController {
 
+    @IBOutlet weak var buttonListTrips: UIButton!
     @IBOutlet weak var mapView: MKMapView!
-    let locationAlert = UIAlertAction(title: "Open", style: .default) { _ in
+    let locationAlertAction = UIAlertAction(title: "Open", style: .default) { _ in
         if let appSettings = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
         }
     }
     
     var locationManager: CLLocationManager?
+    let allD = AllData()
+    var points: [PointInfo]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        buttonListTrips.isHidden = true
         
         // 2
         locationManager = CLLocationManager()
@@ -35,8 +40,25 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         mapView.showsUserLocation = true
         
-        let allD = AllData()
-        allD.takeStationDatas()
+        allD.takeStationDatas() { () in
+            self.points = self.allD.createPointStationsAndReturn()
+            self.createPointsOnMap()
+        }
+    }
+    
+    func createPointsOnMap() {
+        guard let points = points else { return }
+        for point in points {
+            let fullCoordinate = point.coordinate.components(separatedBy: ",")
+            guard let latitude = Double(fullCoordinate[0]) else { return }
+            guard let longitude = Double(fullCoordinate[1]) else { return }
+            let annotation = MKPointAnnotation()
+            let coordinateP = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            print(coordinateP)
+            annotation.coordinate = coordinateP
+            annotation.title = "\(String(point.tripCount)) Trips"
+            mapView.addAnnotation(annotation)
+        }
     }
     
     func createCircleArea(location: CLLocationCoordinate2D) {
@@ -46,6 +68,11 @@ class MapViewController: UIViewController {
         mapView.addOverlay(circle)
     }
     
+    
+    
+    @IBAction func istTripsButton(_ sender: Any) {
+        print("selam")
+    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -63,6 +90,17 @@ extension MapViewController: MKMapViewDelegate {
         print("Error: \(error.localizedDescription)")
     }
 
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        view.detailCalloutAccessoryView?.frame.size.height = 100
+        view.image = UIImage(named: "SelectedPoint")
+        buttonListTrips.isHidden = false
+        }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        view.image = UIImage(named: "Point")
+        buttonListTrips.isHidden = true
+    }
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: overlay)
@@ -73,13 +111,34 @@ extension MapViewController: MKMapViewDelegate {
         }
         return MKOverlayRenderer(overlay: overlay)
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            if annotation is MKUserLocation {
+                return nil
+            }
+            
+            let reuseIdentifier = "CustomAnnotationView"
+        
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView
+            
+            if annotationView == nil {
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            } else {
+                annotationView?.annotation = annotation
+            }
+                
+            annotationView?.image = UIImage(named: "Point")
+            annotationView?.canShowCallout = true
+            
+            return annotationView
+        }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .denied, .restricted:
-            AlertHelper.shared.showAlert(currentVC: self, errorType: .locationError(locationAlert))
+            AlertHelper.shared.showAlert(currentVC: self, errorType: .locationError(locationAlertAction))
         case .authorizedWhenInUse:
             print("When user select option Allow While Using App or Allow Once")
         default:
@@ -87,3 +146,5 @@ extension MapViewController: CLLocationManagerDelegate {
         }
     }
 }
+
+

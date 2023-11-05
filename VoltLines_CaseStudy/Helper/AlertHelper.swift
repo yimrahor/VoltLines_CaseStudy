@@ -15,10 +15,11 @@ class AlertHelper {
     static let shared = AlertHelper()
     
     func showAlert(currentVC:UIViewController,errorType:ErrorTypes){
-            let alert = create(errorType: errorType)
+            let alert = create(errorType)
             currentVC.present(alert, animated: true)
         }
-        private func create(errorType:ErrorTypes)->UIAlertController{
+    
+    private func create(_ errorType:ErrorTypes)->UIAlertController{
             
             var alertAction = UIAlertAction()
             var title = String()
