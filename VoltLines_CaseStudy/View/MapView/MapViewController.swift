@@ -22,6 +22,7 @@ class MapViewController: UIViewController {
     var locationManager: CLLocationManager?
     let allD = AllData()
     var points: [PointInfo]?
+    var selectedPointID: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,8 +71,19 @@ class MapViewController: UIViewController {
     
     
     
-    @IBAction func istTripsButton(_ sender: Any) {
+    @IBAction func istTripsButton(_ sender: UIButton) {
         print("selam")
+        let storyboard = UIStoryboard(name: "ListTripsView", bundle: nil)
+        
+        if let vc = storyboard.instantiateViewController(withIdentifier: "ListTripsViewController") as? UINavigationController {
+            vc.modalPresentationStyle = .formSheet
+            if let listTripsVC = vc.viewControllers.first as? ListTripsViewController {
+                listTripsVC.chosenStationId = selectedPointID
+            }
+            
+            
+            present(vc, animated: true)
+        }
     }
 }
 
@@ -94,6 +106,17 @@ extension MapViewController: MKMapViewDelegate {
         view.detailCalloutAccessoryView?.frame.size.height = 100
         view.image = UIImage(named: "SelectedPoint")
         buttonListTrips.isHidden = false
+        let coordinate = view.annotation?.coordinate
+        points?.forEach({ data in
+            let latitude = String(coordinate!.latitude)
+            let longitude = String(coordinate!.longitude)
+            let fullCoordinate = data.coordinate.components(separatedBy: ",")
+            let lat = fullCoordinate[0]
+            let long = fullCoordinate[1]
+            if (latitude == lat && long == longitude) {
+                selectedPointID = data.id
+            }
+        })
         }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {

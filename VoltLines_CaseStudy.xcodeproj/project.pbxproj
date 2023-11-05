@@ -14,7 +14,7 @@
 		A4C6FBDC2AF3A92500BC6C3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4C6FBDB2AF3A92500BC6C3B /* Assets.xcassets */; };
 		A4C6FBDF2AF3A92500BC6C3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4C6FBDD2AF3A92500BC6C3B /* LaunchScreen.storyboard */; };
 		A4C6FBEA2AF3C5A100BC6C3B /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBE92AF3C5A100BC6C3B /* AlertHelper.swift */; };
-		A4C6FBED2AF3D07300BC6C3B /* StationListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBEC2AF3D07300BC6C3B /* StationListResponse.swift */; };
+		A4C6FBED2AF3D07300BC6C3B /* StationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBEC2AF3D07300BC6C3B /* StationListModel.swift */; };
 		A4C6FBEF2AF3D2AB00BC6C3B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBEE2AF3D2AB00BC6C3B /* APIService.swift */; };
 		A4C6FBF22AF3D2CD00BC6C3B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A4C6FBF12AF3D2CD00BC6C3B /* Alamofire */; };
 		A4C6FBF52AF3D4EC00BC6C3B /* AllData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBF42AF3D4EC00BC6C3B /* AllData.swift */; };
@@ -33,7 +33,7 @@
 		A4C6FBDE2AF3A92500BC6C3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A4C6FBE02AF3A92500BC6C3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4C6FBE92AF3C5A100BC6C3B /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
-		A4C6FBEC2AF3D07300BC6C3B /* StationListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListResponse.swift; sourceTree = "<group>"; };
+		A4C6FBEC2AF3D07300BC6C3B /* StationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListModel.swift; sourceTree = "<group>"; };
 		A4C6FBEE2AF3D2AB00BC6C3B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A4C6FBF42AF3D4EC00BC6C3B /* AllData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllData.swift; sourceTree = "<group>"; };
 		A4C6FBF92AF41B4A00BC6C3B /* ListTripsView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListTripsView.storyboard; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 			children = (
 				A4C6FBF62AF41AEF00BC6C3B /* View */,
 				A4C6FBE62AF3AA8600BC6C3B /* Presenter */,
-				A4C6FBEB2AF3CFFA00BC6C3B /* ResponseModel */,
+				A4C6FBEB2AF3CFFA00BC6C3B /* Model */,
 				A4C6FBF32AF3D4C700BC6C3B /* Service */,
 				A4C6FBE82AF3C56A00BC6C3B /* Helper */,
 				A4C6FBD22AF3A92300BC6C3B /* AppDelegate.swift */,
@@ -102,12 +102,12 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		A4C6FBEB2AF3CFFA00BC6C3B /* ResponseModel */ = {
+		A4C6FBEB2AF3CFFA00BC6C3B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A4C6FBEC2AF3D07300BC6C3B /* StationListResponse.swift */,
+				A4C6FBEC2AF3D07300BC6C3B /* StationListModel.swift */,
 			);
-			path = ResponseModel;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A4C6FBF32AF3D4C700BC6C3B /* Service */ = {
@@ -232,7 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4C6FBED2AF3D07300BC6C3B /* StationListResponse.swift in Sources */,
+				A4C6FBED2AF3D07300BC6C3B /* StationListModel.swift in Sources */,
 				A4C6FBFF2AF4219600BC6C3B /* ListTripsTableViewCell.swift in Sources */,
 				A4C6FBEA2AF3C5A100BC6C3B /* AlertHelper.swift in Sources */,
 				A4C6FBD72AF3A92300BC6C3B /* MapViewController.swift in Sources */,

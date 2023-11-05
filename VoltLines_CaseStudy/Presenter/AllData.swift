@@ -14,6 +14,7 @@ struct PointInfo {
 }
 
 class AllData {
+    var trips = [Trip]()
     var points = [PointInfo]()
     var allDataResponse: StationListResponse?
     
@@ -36,5 +37,23 @@ class AllData {
             points.append(point)
         })
         return points
+    }
+    
+    func createTrips(id: Int) {
+        guard let allDataResponse = allDataResponse else { return }
+        allDataResponse.forEach({ data in
+            if (data.id == id) {
+                guard let listTrips = data.trips else { return }
+                self.trips = listTrips
+            }
+        })
+    }
+    
+    func getTripsCount() -> Int {
+        return trips.count
+    }
+    
+    func getTrip(row: Int) -> Trip {
+        return trips[row]
     }
 }

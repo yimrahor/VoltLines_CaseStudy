@@ -11,11 +11,22 @@ class ListTripsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var chosenStationId: Int?
+    let listTripsData = AllData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureTitle()
         configureView()
+        initDatas()
+    }
+    
+    func initDatas() {
+        listTripsData.takeStationDatas {
+            guard let id = self.chosenStationId else { return }
+            self.listTripsData.createTrips(id: id)
+            self.tableView.reloadData()
+        }
     }
     
     func configureView() {
@@ -44,12 +55,14 @@ extension ListTripsViewController: UITableViewDelegate {
 
 extension ListTripsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return listTripsData.getTripsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListTripCell", for: indexPath) as? ListTripsTableViewCell else { return UITableViewCell() }
-        
+        let trip = listTripsData.getTrip(row: indexPath.row)
+        cell.busName.text = trip.busName
+        cell.time.text = trip.time
         return cell
     }
     
