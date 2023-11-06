@@ -29,4 +29,17 @@ class APIService {
                 }
         }
     }
+    
+    func objectPostRequest<T: Decodable>(url: String, responseType: T.Type, complete: @escaping (Bool)->Void) {
+        
+        AF.request(url, method: .post, encoding: URLEncoding.default).responseJSON { response in
+            if response.response?.statusCode == 200 {
+                complete(true)
+            } else if response.response?.statusCode == 400 {
+                complete(false)
+            } else {
+                    complete(true)
+            }
+        }
+    }
 }

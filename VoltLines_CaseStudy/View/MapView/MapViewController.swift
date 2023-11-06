@@ -23,28 +23,65 @@ class MapViewController: UIViewController {
     let allD = AllData()
     var points: [PointInfo]?
     var selectedPointID: Int?
+    var checkCoordinate: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buttonListTrips.isHidden = true
-        
-        // 2
         locationManager = CLLocationManager()
         locationManager?.delegate = self
-        
-
-        // 3
+            
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.startUpdatingLocation()
-        
+            
         mapView.delegate = self
         mapView.showsUserLocation = true
         
+        configureMapView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        buttonListTrips.isHidden = true
+    }
+    
+    func configureMapView() {
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.layoutIfNeeded()
         allD.takeStationDatas() { () in
             self.points = self.allD.createPointStationsAndReturn()
             self.createPointsOnMap()
         }
+    }
+    
+    func controlCheckCoordinate() {
+        var oldPointAnnotation: MKAnnotation?
+        if checkCoordinate != nil {
+            mapView.annotations.forEach { data in
+                if data.coordinate == checkCoordinate {
+                    mapView.removeAnnotation(data)
+                    oldPointAnnotation = data
+                }
+            }
+            guard let oldPointAnnotation = oldPointAnnotation else { return }
+            mapView.addAnnotation(oldPointAnnotation)
+            
+        }
+       
+        
+        
+        var annnotationCheckPoint: MKAnnotation?
+        guard let selectedPointID = selectedPointID else { return }
+        checkCoordinate = allD.findStationIDCoordinateToBeChecked(stationID: selectedPointID)
+        mapView.annotations.forEach { data in
+            if data.coordinate == checkCoordinate {
+                mapView.removeAnnotation(data)
+                annnotationCheckPoint = data
+            }
+        }
+        guard let annnotationCheckPoint = annnotationCheckPoint else { return }
+        
+        mapView.addAnnotation(annnotationCheckPoint)
+        //mapView.addAnnotation(oldPointAnnotation)
     }
     
     func createPointsOnMap() {
@@ -72,7 +109,6 @@ class MapViewController: UIViewController {
     
     
     @IBAction func istTripsButton(_ sender: UIButton) {
-        print("selam")
         let storyboard = UIStoryboard(name: "ListTripsView", bundle: nil)
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "ListTripsViewController") as? UINavigationController {
@@ -103,8 +139,11 @@ extension MapViewController: MKMapViewDelegate {
     }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        view.detailCalloutAccessoryView?.frame.size.height = 100
-        view.image = UIImage(named: "SelectedPoint")
+        if checkCoordinate == view.annotation!.coordinate {
+            view.image = UIImage(named: "Completed")
+        } else {
+            view.image = UIImage(named: "SelectedPoint")
+        }
         buttonListTrips.isHidden = false
         let coordinate = view.annotation?.coordinate
         points?.forEach({ data in
@@ -120,7 +159,12 @@ extension MapViewController: MKMapViewDelegate {
         }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        view.image = UIImage(named: "Point")
+        if checkCoordinate == view.annotation!.coordinate {
+            view.image = UIImage(named: "Completed")
+        } else {
+            view.image = UIImage(named: "Point")
+        }
+        
         buttonListTrips.isHidden = true
     }
     
@@ -149,8 +193,12 @@ extension MapViewController: MKMapViewDelegate {
             } else {
                 annotationView?.annotation = annotation
             }
-                
+            
+        if checkCoordinate == annotation.coordinate {
+            annotationView?.image = UIImage(named: "Completed")
+        } else {
             annotationView?.image = UIImage(named: "Point")
+        }
             annotationView?.canShowCallout = true
             
             return annotationView

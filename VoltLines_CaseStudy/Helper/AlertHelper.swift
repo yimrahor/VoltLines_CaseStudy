@@ -9,34 +9,39 @@ import UIKit
 
 enum ErrorTypes {
     case locationError(UIAlertAction)
+    case tripError
 }
 
 class AlertHelper {
     static let shared = AlertHelper()
     
     func showAlert(currentVC:UIViewController,errorType:ErrorTypes){
-            let alert = create(errorType)
+            let alert = createError(errorType)
             currentVC.present(alert, animated: true)
         }
     
-    private func create(_ errorType:ErrorTypes)->UIAlertController{
+    private func createError(_ errorType:ErrorTypes)->UIAlertController{
             
-            var alertAction = UIAlertAction()
-            var title = String()
-            var message = String()
+        var alertAction = UIAlertAction()
+        var title = String()
+        var message = String()
             
-            switch errorType {
+        switch errorType {
             case .locationError(let action):
                 title = "Location Service"
                 message = "Permission needs to be granted"
                 alertAction = action
-            }
-            
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            
-            alert.addAction(alertAction)
-            
-            return alert
+            case .tripError:
+                title = "The trip you selected is full."
+                message = "Please select another one"
+            alertAction = UIAlertAction(title: "Select a Trip", style: .default)
+            alertAction.setValue(UIColor.blue, forKey: "titleTextColor")
         }
+            
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(alertAction)
+        
+        return alert
+    }
        
 }

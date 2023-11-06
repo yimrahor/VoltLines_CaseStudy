@@ -63,9 +63,28 @@ extension ListTripsViewController: UITableViewDataSource {
         let trip = listTripsData.getTrip(row: indexPath.row)
         cell.busName.text = trip.busName
         cell.time.text = trip.time
+        
+        cell.cellProtocol = self
+        cell.indexPath = indexPath
         return cell
     }
-    
- 
-    
+}
+
+extension ListTripsViewController: ListTripsTableViewCellProtocol {
+    func bookClicked(indexPath: IndexPath) {
+        let trip = listTripsData.getTrip(row: indexPath.row)
+        listTripsData.tripID = trip.id
+        guard let stationID = chosenStationId else { return }
+        listTripsData.stationID = stationID
+        listTripsData.postTrip { isSuccess in
+            if isSuccess {
+                guard let mVC = self.presentingViewController as? MapViewController else { return }
+                mVC.selectedPointID = stationID
+                mVC.controlCheckCoordinate()
+                self.dismiss(animated: true)
+            } else {
+                AlertHelper.shared.showAlert(currentVC: self, errorType: .tripError)
+            }
+        }
+    }
 }

@@ -21,6 +21,7 @@
 		A4C6FBFA2AF41B4A00BC6C3B /* ListTripsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4C6FBF92AF41B4A00BC6C3B /* ListTripsView.storyboard */; };
 		A4C6FBFC2AF41B7C00BC6C3B /* ListTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBFB2AF41B7C00BC6C3B /* ListTripsViewController.swift */; };
 		A4C6FBFF2AF4219600BC6C3B /* ListTripsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBFE2AF4219600BC6C3B /* ListTripsTableViewCell.swift */; };
+		A4C6FC212AF91BCE00BC6C3B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FC202AF91BCE00BC6C3B /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		A4C6FBF92AF41B4A00BC6C3B /* ListTripsView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListTripsView.storyboard; sourceTree = "<group>"; };
 		A4C6FBFB2AF41B7C00BC6C3B /* ListTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTripsViewController.swift; sourceTree = "<group>"; };
 		A4C6FBFE2AF4219600BC6C3B /* ListTripsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTripsTableViewCell.swift; sourceTree = "<group>"; };
+		A4C6FC202AF91BCE00BC6C3B /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				A4C6FBE92AF3C5A100BC6C3B /* AlertHelper.swift */,
+				A4C6FC202AF91BCE00BC6C3B /* Extension.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				A4C6FBEA2AF3C5A100BC6C3B /* AlertHelper.swift in Sources */,
 				A4C6FBD72AF3A92300BC6C3B /* MapViewController.swift in Sources */,
 				A4C6FBD32AF3A92300BC6C3B /* AppDelegate.swift in Sources */,
+				A4C6FC212AF91BCE00BC6C3B /* Extension.swift in Sources */,
 				A4C6FBEF2AF3D2AB00BC6C3B /* APIService.swift in Sources */,
 				A4C6FBFC2AF41B7C00BC6C3B /* ListTripsViewController.swift in Sources */,
 				A4C6FBF52AF3D4EC00BC6C3B /* AllData.swift in Sources */,
