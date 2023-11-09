@@ -10,6 +10,7 @@ import UIKit
 enum ErrorTypes {
     case locationError(UIAlertAction)
     case tripError
+    case internetError
 }
 
 class AlertHelper {
@@ -22,7 +23,7 @@ class AlertHelper {
     
     private func createError(_ errorType:ErrorTypes)->UIAlertController{
             
-        var alertAction = UIAlertAction()
+        var alertAction: UIAlertAction?
         var title = String()
         var message = String()
             
@@ -34,13 +35,18 @@ class AlertHelper {
             case .tripError:
                 title = "The trip you selected is full."
                 message = "Please select another one"
-            
-            alertAction = UIAlertAction(title: "Select a Trip", style: .default)
-            alertAction.setValue(UIColor.blue, forKey: "titleTextColor")
+                alertAction = UIAlertAction(title: "Select a Trip", style: .default)
+            case .internetError:
+                title = "Internet Error"
+                message = "Failed to retrieve data, check your internet connection"
+                alertAction = UIAlertAction(title: "OK", style: .default)
         }
-            
+        
+        alertAction?.setValue(UIColor.blue, forKey: "titleTextColor")
+        
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(alertAction)
+        let action = alertAction ?? UIAlertAction()
+        alert.addAction(action)
         
         return alert
     }

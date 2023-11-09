@@ -22,7 +22,7 @@ class ListTripsViewController: UIViewController {
     }
     
     func initDatas() {
-        listTripsData.takeStationDatas { [weak self] in
+        listTripsData.takeStationDatas { [weak self] _ in
             guard let id = self?.chosenStationId else { return }
             self?.listTripsData.createTrips(id: id)
             self?.tableView.reloadData()

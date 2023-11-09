@@ -24,9 +24,12 @@ class MapViewController: UIViewController {
     var points: [PointInfo]?
     var selectedPointID: Int?
     var checkCoordinate: CLLocationCoordinate2D?
+    var annotations = [MKAnnotation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         locationManager = CLLocationManager()
         locationManager?.delegate = self
@@ -46,9 +49,13 @@ class MapViewController: UIViewController {
     
     func configureMapView() {
         mapView.removeAnnotations(mapView.annotations)
-        allD.takeStationDatas() { [weak self] in
-            self?.points = self?.allD.createPointStationsAndReturn()
-            self?.createPointsOnMap()
+        allD.takeStationDatas() { [weak self] isSuccess in
+            if isSuccess {
+                self?.points = self?.allD.createPointStationsAndReturn()
+                self?.createPointsOnMap()
+            } else {
+                AlertHelper.shared.showAlert(currentVC: self!, errorType: .internetError)
+            }
         }
     }
     
@@ -93,6 +100,13 @@ class MapViewController: UIViewController {
         let circleRadius: CLLocationDistance = 600
         let circle = MKCircle(center: circleCenter, radius: circleRadius)
         mapView.addOverlay(circle)
+    }
+    
+    @objc func applicationDidBecomeActive(notification: NSNotification) {
+        annotations = mapView.annotations
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotations(annotations)
+
     }
     
     @IBAction func listTripsButton(_ sender: UIButton) {
@@ -181,8 +195,8 @@ extension MapViewController: MKMapViewDelegate {
         } else {
             annotationView?.image = UIImage(named: "Point")
         }
-            annotationView?.canShowCallout = true
-            return annotationView
+        annotationView?.canShowCallout = true
+        return annotationView
     }
 }
 

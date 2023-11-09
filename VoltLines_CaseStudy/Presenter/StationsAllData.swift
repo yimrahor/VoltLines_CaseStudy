@@ -15,14 +15,14 @@ final class StationsAllData {
     var stationID: Int?
     var tripID: Int?
     
-    func takeStationDatas(complete: @escaping ()->()) {
+    func takeStationDatas(complete: @escaping (Bool)->()) {
         APIService.call.objectRequestJSON(url: "\(BASE_URL)/stations/", responseType: StationListResponse.self) { (result:Result<StationListResponse,Error>) in
             switch result {
             case .success(let data):
                 self.allDataResponse = data
-                complete()
-            case .failure(let err):
-                print(err)
+                complete(true)
+            case .failure(_):
+                complete(false)
             }
         }
     }
