@@ -28,9 +28,12 @@ class ListTripsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func createCell(model: Trip) {
+        self.busName.text = model.busName
+        self.time.text = model.time
+    }
+    
     @IBAction func bookButtonTapped(_ sender: Any) {
         cellProtocol?.bookClicked(indexPath: indexPath!)
     }
-    
-
 }

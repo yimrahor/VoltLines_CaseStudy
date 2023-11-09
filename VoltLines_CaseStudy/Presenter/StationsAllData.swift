@@ -8,13 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct PointInfo {
-    var id: Int
-    var coordinate: String
-    var tripCount: Int
-}
-
-class AllData {
+final class StationsAllData {
     var trips = [Trip]()
     var points = [PointInfo]()
     var allDataResponse: StationListResponse?
@@ -22,7 +16,7 @@ class AllData {
     var tripID: Int?
     
     func takeStationDatas(complete: @escaping ()->()) {
-        APIService.call.objectRequestJSON(url: "https://demo.voltlines.com/case-study/6/stations/", responseType: StationListResponse.self) { (result:Result<StationListResponse,Error>) in
+        APIService.call.objectRequestJSON(url: "\(BASE_URL)/stations/", responseType: StationListResponse.self) { (result:Result<StationListResponse,Error>) in
             switch result {
             case .success(let data):
                 self.allDataResponse = data
@@ -33,9 +27,8 @@ class AllData {
         }
     }
     
-    func postTrip(complete: @escaping (Bool)->()) {
-        guard let tripID = tripID, let stationID = stationID else { return }
-        APIService.call.objectPostRequest(url: "https://demo.voltlines.com/case-study/6/stations/\(String(stationID))/trips/\(String(tripID))", responseType: Trip.self) { bool in
+    func postTrip(tripID: Int, stationID: Int, complete: @escaping (Bool)->()) {
+        APIService.call.objectPostRequest(url: "\(BASE_URL)/stations/\(String(stationID))/trips/\(String(tripID))", responseType: Trip.self) { bool in
             if bool {
                 complete(true)
             } else {
@@ -76,9 +69,7 @@ class AllData {
         allDataResponse?.forEach({ data in
             if data.id == stationID {
                 guard let coordinate = data.centerCoordinates else { return }
-                let fullCoordinate = coordinate.components(separatedBy: ",")
-                guard let latitude = Double(fullCoordinate[0]) else { return }
-                guard let longitude = Double(fullCoordinate[1]) else { return }
+                let (latitude, longitude) = coordinate.stringToLatitudeAndLongitude()
                 coordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             }
         })

@@ -34,6 +34,7 @@ class AlertHelper {
             case .tripError:
                 title = "The trip you selected is full."
                 message = "Please select another one"
+            
             alertAction = UIAlertAction(title: "Select a Trip", style: .default)
             alertAction.setValue(UIColor.blue, forKey: "titleTextColor")
         }
@@ -43,5 +44,4 @@ class AlertHelper {
         
         return alert
     }
-       
 }

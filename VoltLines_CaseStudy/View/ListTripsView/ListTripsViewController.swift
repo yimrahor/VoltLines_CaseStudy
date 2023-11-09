@@ -12,7 +12,7 @@ class ListTripsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var chosenStationId: Int?
-    let listTripsData = AllData()
+    let listTripsData = StationsAllData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +22,10 @@ class ListTripsViewController: UIViewController {
     }
     
     func initDatas() {
-        listTripsData.takeStationDatas {
-            guard let id = self.chosenStationId else { return }
-            self.listTripsData.createTrips(id: id)
-            self.tableView.reloadData()
+        listTripsData.takeStationDatas { [weak self] in
+            guard let id = self?.chosenStationId else { return }
+            self?.listTripsData.createTrips(id: id)
+            self?.tableView.reloadData()
         }
     }
     
@@ -61,9 +61,7 @@ extension ListTripsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListTripCell", for: indexPath) as? ListTripsTableViewCell else { return UITableViewCell() }
         let trip = listTripsData.getTrip(row: indexPath.row)
-        cell.busName.text = trip.busName
-        cell.time.text = trip.time
-        
+        cell.createCell(model: trip)
         cell.cellProtocol = self
         cell.indexPath = indexPath
         return cell
@@ -73,17 +71,16 @@ extension ListTripsViewController: UITableViewDataSource {
 extension ListTripsViewController: ListTripsTableViewCellProtocol {
     func bookClicked(indexPath: IndexPath) {
         let trip = listTripsData.getTrip(row: indexPath.row)
-        listTripsData.tripID = trip.id
+        guard let tripID = trip.id else { return }
         guard let stationID = chosenStationId else { return }
-        listTripsData.stationID = stationID
-        listTripsData.postTrip { isSuccess in
+        listTripsData.postTrip(tripID: tripID, stationID: stationID) { [weak self] isSuccess in
             if isSuccess {
-                guard let mVC = self.presentingViewController as? MapViewController else { return }
+                guard let mVC = self?.presentingViewController as? MapViewController else { return }
                 mVC.selectedPointID = stationID
                 mVC.controlCheckCoordinate()
-                self.dismiss(animated: true)
+                self?.dismiss(animated: true)
             } else {
-                AlertHelper.shared.showAlert(currentVC: self, errorType: .tripError)
+                AlertHelper.shared.showAlert(currentVC: self!, errorType: .tripError)
             }
         }
     }

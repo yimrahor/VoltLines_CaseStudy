@@ -17,11 +17,13 @@
 		A4C6FBED2AF3D07300BC6C3B /* StationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBEC2AF3D07300BC6C3B /* StationListModel.swift */; };
 		A4C6FBEF2AF3D2AB00BC6C3B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBEE2AF3D2AB00BC6C3B /* APIService.swift */; };
 		A4C6FBF22AF3D2CD00BC6C3B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A4C6FBF12AF3D2CD00BC6C3B /* Alamofire */; };
-		A4C6FBF52AF3D4EC00BC6C3B /* AllData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBF42AF3D4EC00BC6C3B /* AllData.swift */; };
+		A4C6FBF52AF3D4EC00BC6C3B /* StationsAllData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBF42AF3D4EC00BC6C3B /* StationsAllData.swift */; };
 		A4C6FBFA2AF41B4A00BC6C3B /* ListTripsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4C6FBF92AF41B4A00BC6C3B /* ListTripsView.storyboard */; };
 		A4C6FBFC2AF41B7C00BC6C3B /* ListTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBFB2AF41B7C00BC6C3B /* ListTripsViewController.swift */; };
 		A4C6FBFF2AF4219600BC6C3B /* ListTripsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FBFE2AF4219600BC6C3B /* ListTripsTableViewCell.swift */; };
 		A4C6FC212AF91BCE00BC6C3B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FC202AF91BCE00BC6C3B /* Extension.swift */; };
+		A4C6FC252AFCDBD400BC6C3B /* PointInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FC242AFCDBD400BC6C3B /* PointInfoModel.swift */; };
+		A4C6FC272AFCDC2F00BC6C3B /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C6FC262AFCDC2F00BC6C3B /* Consts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,11 +38,13 @@
 		A4C6FBE92AF3C5A100BC6C3B /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		A4C6FBEC2AF3D07300BC6C3B /* StationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListModel.swift; sourceTree = "<group>"; };
 		A4C6FBEE2AF3D2AB00BC6C3B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		A4C6FBF42AF3D4EC00BC6C3B /* AllData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllData.swift; sourceTree = "<group>"; };
+		A4C6FBF42AF3D4EC00BC6C3B /* StationsAllData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsAllData.swift; sourceTree = "<group>"; };
 		A4C6FBF92AF41B4A00BC6C3B /* ListTripsView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListTripsView.storyboard; sourceTree = "<group>"; };
 		A4C6FBFB2AF41B7C00BC6C3B /* ListTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTripsViewController.swift; sourceTree = "<group>"; };
 		A4C6FBFE2AF4219600BC6C3B /* ListTripsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTripsTableViewCell.swift; sourceTree = "<group>"; };
 		A4C6FC202AF91BCE00BC6C3B /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		A4C6FC242AFCDBD400BC6C3B /* PointInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointInfoModel.swift; sourceTree = "<group>"; };
+		A4C6FC262AFCDC2F00BC6C3B /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +95,7 @@
 		A4C6FBE62AF3AA8600BC6C3B /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				A4C6FBF42AF3D4EC00BC6C3B /* AllData.swift */,
+				A4C6FBF42AF3D4EC00BC6C3B /* StationsAllData.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -101,6 +105,7 @@
 			children = (
 				A4C6FBE92AF3C5A100BC6C3B /* AlertHelper.swift */,
 				A4C6FC202AF91BCE00BC6C3B /* Extension.swift */,
+				A4C6FC262AFCDC2F00BC6C3B /* Consts.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 		A4C6FBEB2AF3CFFA00BC6C3B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A4C6FC242AFCDBD400BC6C3B /* PointInfoModel.swift */,
 				A4C6FBEC2AF3D07300BC6C3B /* StationListModel.swift */,
 			);
 			path = Model;
@@ -240,10 +246,12 @@
 				A4C6FBEA2AF3C5A100BC6C3B /* AlertHelper.swift in Sources */,
 				A4C6FBD72AF3A92300BC6C3B /* MapViewController.swift in Sources */,
 				A4C6FBD32AF3A92300BC6C3B /* AppDelegate.swift in Sources */,
+				A4C6FC272AFCDC2F00BC6C3B /* Consts.swift in Sources */,
 				A4C6FC212AF91BCE00BC6C3B /* Extension.swift in Sources */,
 				A4C6FBEF2AF3D2AB00BC6C3B /* APIService.swift in Sources */,
 				A4C6FBFC2AF41B7C00BC6C3B /* ListTripsViewController.swift in Sources */,
-				A4C6FBF52AF3D4EC00BC6C3B /* AllData.swift in Sources */,
+				A4C6FC252AFCDBD400BC6C3B /* PointInfoModel.swift in Sources */,
+				A4C6FBF52AF3D4EC00BC6C3B /* StationsAllData.swift in Sources */,
 				A4C6FBD52AF3A92300BC6C3B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

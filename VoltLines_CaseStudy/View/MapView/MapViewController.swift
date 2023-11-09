@@ -20,7 +20,7 @@ class MapViewController: UIViewController {
     }
     
     var locationManager: CLLocationManager?
-    let allD = AllData()
+    let allD = StationsAllData()
     var points: [PointInfo]?
     var selectedPointID: Int?
     var checkCoordinate: CLLocationCoordinate2D?
@@ -46,69 +46,56 @@ class MapViewController: UIViewController {
     
     func configureMapView() {
         mapView.removeAnnotations(mapView.annotations)
-        mapView.layoutIfNeeded()
-        allD.takeStationDatas() { () in
-            self.points = self.allD.createPointStationsAndReturn()
-            self.createPointsOnMap()
+        allD.takeStationDatas() { [weak self] in
+            self?.points = self?.allD.createPointStationsAndReturn()
+            self?.createPointsOnMap()
         }
-    }
-    
-    func controlCheckCoordinate() {
-        var oldPointAnnotation: MKAnnotation?
-        if checkCoordinate != nil {
-            mapView.annotations.forEach { data in
-                if data.coordinate == checkCoordinate {
-                    mapView.removeAnnotation(data)
-                    oldPointAnnotation = data
-                }
-            }
-            guard let oldPointAnnotation = oldPointAnnotation else { return }
-            mapView.addAnnotation(oldPointAnnotation)
-            
-        }
-       
-        
-        
-        var annnotationCheckPoint: MKAnnotation?
-        guard let selectedPointID = selectedPointID else { return }
-        checkCoordinate = allD.findStationIDCoordinateToBeChecked(stationID: selectedPointID)
-        mapView.annotations.forEach { data in
-            if data.coordinate == checkCoordinate {
-                mapView.removeAnnotation(data)
-                annnotationCheckPoint = data
-            }
-        }
-        guard let annnotationCheckPoint = annnotationCheckPoint else { return }
-        
-        mapView.addAnnotation(annnotationCheckPoint)
-        //mapView.addAnnotation(oldPointAnnotation)
     }
     
     func createPointsOnMap() {
         guard let points = points else { return }
         for point in points {
-            let fullCoordinate = point.coordinate.components(separatedBy: ",")
-            guard let latitude = Double(fullCoordinate[0]) else { return }
-            guard let longitude = Double(fullCoordinate[1]) else { return }
+            let (lat, lon) = point.coordinate.stringToLatitudeAndLongitude()
+            let coordinateP = CLLocationCoordinate2D(latitude: lat, longitude: lon)
             let annotation = MKPointAnnotation()
-            let coordinateP = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            print(coordinateP)
             annotation.coordinate = coordinateP
             annotation.title = "\(String(point.tripCount)) Trips"
             mapView.addAnnotation(annotation)
         }
     }
     
+    func controlCheckCoordinate() {
+        if checkCoordinate != nil {
+            guard let oldPointAnnotation = removeAnnotation() else { return }
+            mapView.addAnnotation(oldPointAnnotation)
+        }
+       
+        guard let selectedPointID = selectedPointID else { return }
+        checkCoordinate = allD.findStationIDCoordinateToBeChecked(stationID: selectedPointID)
+        guard let annnotationCheckPoint = removeAnnotation() else { return }
+        mapView.addAnnotation(annnotationCheckPoint)
+    }
+    
+    func removeAnnotation() -> MKAnnotation? {
+        var annotation: MKAnnotation?
+        
+        mapView.annotations.forEach { [weak self] data in
+            if data.coordinate == self?.checkCoordinate {
+                self?.mapView.removeAnnotation(data)
+                annotation = data
+            }
+        }
+        return annotation
+    }
+    
     func createCircleArea(location: CLLocationCoordinate2D) {
         let circleCenter = location
-        let circleRadius: CLLocationDistance = 600 // Yarıçapı metre cinsinden belirtin
+        let circleRadius: CLLocationDistance = 600
         let circle = MKCircle(center: circleCenter, radius: circleRadius)
         mapView.addOverlay(circle)
     }
     
-    
-    
-    @IBAction func istTripsButton(_ sender: UIButton) {
+    @IBAction func listTripsButton(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "ListTripsView", bundle: nil)
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "ListTripsViewController") as? UINavigationController {
@@ -116,8 +103,6 @@ class MapViewController: UIViewController {
             if let listTripsVC = vc.viewControllers.first as? ListTripsViewController {
                 listTripsVC.chosenStationId = selectedPointID
             }
-            
-            
             present(vc, animated: true)
         }
     }
@@ -147,16 +132,14 @@ extension MapViewController: MKMapViewDelegate {
         buttonListTrips.isHidden = false
         let coordinate = view.annotation?.coordinate
         points?.forEach({ data in
-            let latitude = String(coordinate!.latitude)
-            let longitude = String(coordinate!.longitude)
-            let fullCoordinate = data.coordinate.components(separatedBy: ",")
-            let lat = fullCoordinate[0]
-            let long = fullCoordinate[1]
-            if (latitude == lat && long == longitude) {
+            let latitude = coordinate!.latitude
+            let longitude = coordinate!.longitude
+            let (lat,lon) = data.coordinate.stringToLatitudeAndLongitude()
+            if (latitude == lat && lon == longitude) {
                 selectedPointID = data.id
             }
         })
-        }
+    }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         if checkCoordinate == view.annotation!.coordinate {
@@ -164,7 +147,6 @@ extension MapViewController: MKMapViewDelegate {
         } else {
             view.image = UIImage(named: "Point")
         }
-        
         buttonListTrips.isHidden = true
     }
     
@@ -180,19 +162,19 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-            if annotation is MKUserLocation {
-                return nil
-            }
+        if annotation is MKUserLocation {
+            return nil
+        }
             
-            let reuseIdentifier = "CustomAnnotationView"
+        let reuseIdentifier = "CustomAnnotationView"
         
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView
             
-            if annotationView == nil {
-                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-            } else {
-                annotationView?.annotation = annotation
-            }
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        } else {
+            annotationView?.annotation = annotation
+        }
             
         if checkCoordinate == annotation.coordinate {
             annotationView?.image = UIImage(named: "Completed")
@@ -200,9 +182,8 @@ extension MapViewController: MKMapViewDelegate {
             annotationView?.image = UIImage(named: "Point")
         }
             annotationView?.canShowCallout = true
-            
             return annotationView
-        }
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {

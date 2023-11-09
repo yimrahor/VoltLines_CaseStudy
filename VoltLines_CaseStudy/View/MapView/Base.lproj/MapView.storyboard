@@ -38,7 +38,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="istTripsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q4a-2n-zpP"/>
+                                    <action selector="listTripsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q4a-2n-zpP"/>
                                 </connections>
                             </button>
                         </subviews>
