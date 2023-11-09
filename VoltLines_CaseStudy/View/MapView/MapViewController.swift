@@ -29,7 +29,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         
         locationManager = CLLocationManager()
         locationManager?.delegate = self
@@ -102,7 +102,7 @@ class MapViewController: UIViewController {
         mapView.addOverlay(circle)
     }
     
-    @objc func applicationDidBecomeActive(notification: NSNotification) {
+    @objc func applicationDidEnterBackground(notification: NSNotification) {
         annotations = mapView.annotations
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(annotations)
